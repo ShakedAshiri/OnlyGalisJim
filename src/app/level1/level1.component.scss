@@ -1,0 +1,151 @@
+@mixin vertical-align {
+  position: relative;
+  top: 40%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+}
+
+h1 {
+  color: #fff;
+  font-size: 36px;
+  font-weight: normal;
+  text-align: center;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+}
+
+.wrapper {
+  background: -moz-linear-gradient(top,  #3741d0 0%, #332180 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3741d0), color-stop(100%,#332180));
+  background: -webkit-linear-gradient(top,  #3741d0 0%,#332180 100%);
+  background: -o-linear-gradient(top,  #3741d0 0%,#332180 100%);
+  background: -ms-linear-gradient(top,  #3741d0 0%,#332180 100%);
+  background: linear-gradient(to bottom,  #3741d0 0%,#332180 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3741d0', endColorstr='#332180',GradientType=0 );
+  height:100vh;
+  @media (min-width: 600px) {
+    padding-top: 24px;
+  }
+}
+.btn-wrap {
+  display: block;
+  margin: 2em auto;
+  transition: all 0.75s ease;
+  position: relative;
+  height: 100px;
+  width: 100px;
+  &:before {
+    content: '';
+    border-radius: 50%;
+    box-shadow: inset 0 10px 10px rgba(0, 0, 0, 0.15);
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    z-index: 2;
+    width: 120px;
+    height: 120px;
+    transition: all 0.75s ease;
+  }
+  &:after {
+    position: absolute;
+    background: #ffcc00;
+    width: 140px;
+    height: 140px;
+    z-index: 1;
+    content: '';
+    left: -20px;
+    top: -20px;
+    border-radius: 50%;
+    border-bottom: 3px solid #ff9900;
+    box-shadow: 0px 3px 2px 2px rgba(0, 0, 0, 0.15);
+    transition: all 0.75s ease;
+  }
+  @media (min-width: 600px) {
+    left: 25%;
+    margin: auto;
+    margin-top: -50px;
+    position: absolute;
+    top: 50%;
+  }
+}
+.tricky {
+  left: 60%;
+  z-index: 50;
+  &:after {
+    background-color: #cc0000;
+    border-bottom-color: #ae0000;
+  }
+  .btn {
+    color: #fff;
+    background: #cc0000;
+    border-bottom: 5px solid #ae0000;
+    &:hover {
+      border-bottom: 3px solid #ae0000;
+    }
+    span {
+      text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.5), 1px 1px 0px rgba(255,100,100,0.5);
+      &:before {
+        content: 'לברוח מהבסיס';
+      }
+    }
+  }
+  &.active {
+    height: 50px;
+    width: 50px;
+    span {
+      font-size: 14px;
+      &:before {
+        content: 'לאאאא';
+      }
+    }
+    &:before {
+      box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.15);
+      width: 60px;
+      height: 60px;
+      left: -5px;
+      top: -5px;
+    }
+    &:after {
+      box-shadow: 0px 2px 1px 1px rgba(0, 0, 0, 0.15);
+      left: -10px;
+      top: -10px;
+      width: 70px;
+      height: 70px;
+    }
+  }
+}
+
+.btn-nope {
+  background: #ffcc00;
+  border-radius: 50%;
+  border-bottom: 5px solid #ffb300;
+  box-shadow: 0px 4px 2px 2px rgba(0, 0, 0, 0.25);
+  color: #333;
+  display: block;
+  font-weight: bold;
+  height: 100%;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.1s ease;
+  width: 100%;
+  z-index: 10;
+  &:hover {
+    border-bottom: 3px solid #ffb300;
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.3);
+    margin-top: 2px;
+  }
+  span {
+    font-size: 21px;
+    line-height: 1;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+    @include vertical-align;
+  }
+}
