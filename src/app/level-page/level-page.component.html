@@ -1,5 +1,5 @@
 <div class="seaView container-fluid">
-  <h1>אתה עכשיו בשלב: {{level.id}}</h1>
+  <h1>אתה עכשיו בשלבA {{level.id}}</h1>
 
   <app-level1 *ngIf="level.id == 1" (nextEvent)="next($event)"></app-level1>
   <app-level2 *ngIf="level.id == 2" (nextEvent)="next($event)"></app-level2>
