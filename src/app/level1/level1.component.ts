@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-level1',
@@ -13,11 +14,34 @@ export class Level1Component implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-
+    this.nopeButton();
   }
 
   next(id: number): void {
     this.nextEvent.next(id);
+  }
+
+  nopeButton() {
+    $(function(){
+      $(".tricky").on({
+        mouseover:function(){
+          $(this).css({
+            left:(Math.random()*90)+"%",
+            top:(Math.random()*90)+"%",
+          });
+        }
+      });
+      $(".btn-wrap").hover(function() {
+        $(this).toggleClass('active');
+      });
+    });
+
+    $('.tricky').bind('touchstart', function(){
+      $(this).css({
+        left:(Math.random()*90)+"%",
+        top:(Math.random()*90)+"%"
+      });
+    })
   }
 }
 
