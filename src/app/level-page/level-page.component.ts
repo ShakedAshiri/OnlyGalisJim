@@ -9,7 +9,7 @@ import {LevelNode} from "../level-node";
   styleUrls: ['./level-page.component.scss']
 })
 export class LevelPageComponent implements OnInit {
-  public level: LevelNode = {id:-1, nextLevels:[]};
+  public level: LevelNode = {id:-1, nextLevels:[], name:""};
 
   constructor(private route: ActivatedRoute,
               protected levelService: LevelService,
