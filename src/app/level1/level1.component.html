@@ -7,30 +7,39 @@
   </div>
 </div>
 <div class="d-flex flex-row justify-content-center second">
-  <div class="btn-wrap nicey">
-    <a href="javascript:void(0)" class="btn-nope" title="more" (click)="timer();">
-      <span>לחכות</span>
+  <div id="timer">
+    <div class="base-timer">
+      <svg class="base-timer__svg" viewBox="0 -10 90 100" xmlns="http://www.w3.org/2000/svg">
+        <g class="base-timer__circle">
+          <circle class="base-timer__path-elapsed" cx="45" cy="35" r="37"></circle>
+          <path id="base-timer-path-remaining" stroke-dasharray="232" class="base-timer__path-remaining yellow"
+                d="
+                  M 50, 50
+                  m -58, 0
+                  a 12,12 0 1,0 75,0
+                  a 12,12 2 1,0 -75,0
+                  ">
+          </path>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+
+
+
+  <div class="btn-wrap2 nicey">
+    <a href="javascript:void(0)" class="btn-nope" title="more" (click)="startTimer();">
+      <span id="base-timer-label">לחכות</span>
     </a>
   </div>
+
+
 </div>
 <div class="d-flex flex-row justify-content-center third">
   <div class="btn-wrap nicey">
     <a href="javascript:void(0)" class="btn-nope" title="more" (click)="next(2)">
       <span>לחתום קבע</span>
     </a>
-  </div>
-</div>
-
-
-<div class="d-flex flex-row justify-content-center" style="margin-top: 145px;">
-  <div id="timer" class="time">
-    <div class="base-timer"><svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <g class="base-timer__circle">
-        <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
-        <path id="base-timer-path-remaining" stroke-dasharray="283" class="base-timer__path-remaining green"
-        d="M 50, 50 m -45, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0">
-        </path>
-        </g>
-      </svg><span id="base-timer-label" class="base-timer__label">0:60</span></div>
   </div>
 </div>

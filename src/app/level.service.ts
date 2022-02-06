@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {LevelNode} from "./level-node";
+import {BehaviorSubject, Observable} from "rxjs";
 //import {readFileSync} from "fs";
 
 @Injectable({
@@ -7,6 +8,7 @@ import {LevelNode} from "./level-node";
 })
 export class LevelService {
   levelsFile: any;
+  private _userInteraction: BehaviorSubject<string> = new BehaviorSubject("");
 
   currentLevel: number = -1;
   levelNodes: LevelNode[] = [];
@@ -19,7 +21,7 @@ export class LevelService {
   constructor() {
     var lvl = <LevelNode>{};
     lvl.id = 1;
-    lvl.nextLevels = [2,3,-1];
+    lvl.nextLevels = [2,3,-1,-2];
     lvl.name = "start";
 
 // u is criminal - handle later
@@ -62,7 +64,7 @@ export class LevelService {
     // field trip time
     var lvl7 = <LevelNode>{};
     lvl7.id = 8;
-    lvl7.nextLevels = [-2, -2, -2];
+    lvl7.nextLevels = [-3, -3, -3];
     lvl7.name = "field trip time";
 
 
@@ -72,12 +74,15 @@ export class LevelService {
     end1.id = -1;
     end1.nextLevels = [1];
 
-
     var end2 = <LevelNode>{};
     end2.id = -2;
     end2.nextLevels = [1];
 
-    this.endings.push(end1, end2);
+    var end3 = <LevelNode>{};
+    end3.id = -3;
+    end3.nextLevels = [1];
+
+    this.endings.push(end1, end2, end3);
   }
 
 
@@ -103,5 +108,13 @@ export class LevelService {
 
   setHasBeard(b: boolean) {
     this.hasBeard = b;
+  }
+
+  public get getUserInteraction(): Observable<any>{
+    return this._userInteraction.asObservable();
+  }
+
+  setUserInteraction(val: string) {
+    this._userInteraction.next(val);
   }
 }

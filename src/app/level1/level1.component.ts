@@ -1,5 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import * as $ from 'jquery';
+import {LevelService} from "../level.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-level1',
@@ -8,10 +10,13 @@ import * as $ from 'jquery';
 })
 export class Level1Component implements OnInit {
   @Output() nextEvent = new EventEmitter<number>();
+  @Output() nextEndEvent = new EventEmitter<number>();
 
-  isWait = "";
+  private userMovedSubscription!: Subscription;
+  isWait = false;
 
-  constructor() {}
+
+  constructor(private levelService: LevelService) {}
 
 
   ngOnInit(): void {
@@ -45,10 +50,35 @@ export class Level1Component implements OnInit {
     })
   }
 
-  timer() {
+  startTimer() {
+    this.timer();
+    let moves = 0;
+    this.userMovedSubscription = this.levelService.getUserInteraction.subscribe(() => {
+
+      console.log("user did stuff: " + moves);
+      // HA! YOU MOVED!!
+      if (moves >= 2) {
+        console.log("YOU MOVED!")
+
+        this.onTimesUp();
+        this.userMovedSubscription.unsubscribe();
+        this.nextEvent.emit(3);
+      } else {
+        moves++;
+      }
+    })
+  }
+
+  private timerInterval = 60;
+
+  private onTimesUp = () => {
+    clearInterval(this.timerInterval);
+  }
+
+  private timer() {
     // Credit: Mateusz Rybczonec
 
-    const FULL_DASH_ARRAY = 283;
+    const FULL_DASH_ARRAY = 230;
     const WARNING_THRESHOLD = 10;
     const ALERT_THRESHOLD = 5;
 
@@ -66,35 +96,26 @@ export class Level1Component implements OnInit {
       }
     };
 
-    const TIME_LIMIT = 60;
+    const TIME_LIMIT = 10;
     let timePassed = 0;
     let timeLeft = TIME_LIMIT;
-    let timerInterval = 60;
-    let remainingPathColor = COLOR_CODES.info.color;
 
-    startTimer();
+    this.timerInterval = setInterval(() => {
+      timePassed = timePassed += 1;
+      timeLeft = TIME_LIMIT - timePassed;
+      $("#base-timer-label").html(function() {
+        return formatTime(
+          timeLeft
+        );
+      });
+      setCircleDasharray();
+      setRemainingPathColor(timeLeft);
 
-    function onTimesUp() {
-      clearInterval(timerInterval);
-    }
-
-    function startTimer() {
-      timerInterval = setInterval(() => {
-        timePassed = timePassed += 1;
-        timeLeft = TIME_LIMIT - timePassed;
-        $("#base-timer-label").html(function() {
-          return formatTime(
-            timeLeft
-          );
-        });
-        setCircleDasharray();
-        setRemainingPathColor(timeLeft);
-
-        if (timeLeft === 0) {
-          onTimesUp();
-        }
-      }, 1000);
-    }
+      if (timeLeft === 0) {
+        this.onTimesUp();
+        this.nextEvent.emit(1);
+      }
+    }, 1000);
 
     function formatTime(time: number) {
       const minutes = Math.floor(time / 60);
@@ -127,7 +148,7 @@ export class Level1Component implements OnInit {
     function setCircleDasharray() {
       const circleDasharray = `${(
         calculateTimeFraction() * FULL_DASH_ARRAY
-      ).toFixed(0)} 283`;
+      ).toFixed(0)} 232`;
       $("#base-timer-path-remaining").attr("stroke-dasharray", circleDasharray);
     }
 
