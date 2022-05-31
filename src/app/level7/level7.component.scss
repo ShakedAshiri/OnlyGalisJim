@@ -1,0 +1,438 @@
+.moon {
+  background: linear-gradient(-45deg, rgba(95, 145, 255, 1), #ffff37);
+  border-radius: 999px;
+  filter: drop-shadow(0 0 6px rgba(105, 155, 255, 1));
+  width:80px;
+  height: 76px;
+  bottom: 119px;
+  left: 328px;
+  position: relative;
+}
+
+.ground {
+  bottom: 0;
+  width: 100vw;
+  height: 32vh;
+  background-color: #642e00;
+  position: absolute;
+  z-index: 2;
+}
+
+.tent {
+  position: relative;
+  bottom: 28vh;
+  z-index: 4;
+  right: 70vw;
+
+  img {
+    filter: brightness(50%);
+    width: 278px;
+    transform:scaleX(-1);
+  }
+}
+
+.tree {
+  position: relative;
+  top: 8vh;
+  z-index: 4;
+  right: 8vw;
+
+  img {
+    filter: brightness(44%);
+    width: 216px;
+    transform:scaleX(-1);
+  }
+}
+
+.israel-trail {
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  //background-color: white;
+  height: 80vh;
+  overflow: hidden;
+  display: flex;
+  font-family: 'Anton', sans-serif;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+}
+
+$shooting-time: 3000ms;
+
+
+.night {
+  //background-color: yellow;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: rotateZ(45deg);
+
+  z-index: 1;
+  //bottom: 86px;
+  // animation: sky 200000ms linear infinite;
+}
+
+.shooting_star {
+  position: absolute;
+  left: 0%;
+  top: 50%;
+  // width: 100px;
+  height: 2px;
+  background: linear-gradient(-45deg, rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
+  border-radius: 999px;
+  filter: drop-shadow(0 0 6px rgba(105, 155, 255, 1));
+  animation:
+    tail $shooting-time ease-in-out infinite,
+    shooting $shooting-time ease-in-out infinite;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: calc(50% - 1px);
+    right: 0;
+    // width: 30px;
+    height: 2px;
+    background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
+    transform: translateX(50%) rotateZ(45deg);
+    border-radius: 100%;
+    animation: shining $shooting-time ease-in-out infinite;
+  }
+
+  &::after {
+    // CodePen Error
+    // @extend .shooting_star::before;
+
+    content: '';
+    position: absolute;
+    top: calc(50% - 1px);
+    right: 0;
+    // width: 30px;
+    height: 2px;
+    background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
+    transform: translateX(50%) rotateZ(45deg);
+    border-radius: 100%;
+    animation: shining $shooting-time ease-in-out infinite;
+    transform: translateX(50%) rotateZ(-45deg);
+  }
+
+  @for $i from 1 through 100 {
+    &:nth-child(#{$i}) {
+      $delay: random(9999) + 0ms;
+
+      left: calc(#{random(1200) + 0px}); //-530 <= #{random(1159) - 626px}  <= 533;
+      top: calc(#{random(1343) - 626px}); //-126 <---> 423
+
+      animation-delay: $delay;
+      // opacity: random(50) / 100 + 0.5;
+
+      &::before,
+      &::after {
+        animation-delay: $delay;
+      }
+    }
+  }
+}
+
+.star {
+  position: absolute;
+  left: 0%;
+  top: 50%;
+  // width: 100px;
+  height: 2px;
+  background: linear-gradient(-45deg, rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
+  border-radius: 999px;
+  filter: drop-shadow(0 0 6px rgba(105, 155, 255, 1));
+  //animation:
+  //tail $shooting-time ease-in-out infinite,
+  //shooting $shooting-time ease-in-out infinite;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: calc(50% - 1px);
+    right: 0;
+    // width: 30px;
+    height: 2px;
+    background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
+    transform: translateX(50%) rotateZ(45deg);
+    border-radius: 100%;
+    animation: shining $shooting-time ease-in-out infinite;
+  }
+
+  &::after {
+    // CodePen Error
+    // @extend .shooting_star::before;
+
+    content: '';
+    position: absolute;
+    top: calc(50% - 1px);
+    right: 0;
+    // width: 30px;
+    height: 2px;
+    background: linear-gradient(-45deg, rgba(0, 0, 255, 0), rgba(95, 145, 255, 1), rgba(0, 0, 255, 0));
+    transform: translateX(50%) rotateZ(45deg);
+    border-radius: 100%;
+    animation: shining $shooting-time ease-in-out infinite;
+    transform: translateX(50%) rotateZ(-45deg);
+  }
+
+  @for $i from 1 through 100 {
+    &:nth-child(#{$i}) {
+      $delay: random(9999) + 0ms;
+
+      left: calc(#{random(1200) + 0px}); //-530 <= #{random(1159) - 626px}  <= 533;
+      top: calc(#{random(1343) - 626px}); //-126 <---> 423
+
+      animation-delay: $delay;
+      // opacity: random(50) / 100 + 0.5;
+
+      &::before,
+      &::after {
+        animation-delay: $delay;
+      }
+    }
+  }
+}
+
+@keyframes tail {
+  0% {
+    width: 0;
+  }
+
+  30% {
+    width: 100px;
+  }
+
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes shining {
+  0% {
+    width: 0;
+  }
+
+  50% {
+    width: 30px;
+  }
+
+  100% {
+    width: 0;
+  }
+}
+
+@keyframes shooting {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(300px);
+  }
+}
+
+@keyframes sky {
+  0% {
+    transform: rotate(45deg);
+  }
+
+  100% {
+    transform: rotate(45 + 360deg);
+  }
+}
+
+
+/*dino*/
+
+.dino {
+
+  left: 0;
+  position: fixed;
+  //top: 100px;
+  bottom: 0px;
+  z-index: 5;
+
+  // up arrow - start and jump
+  // down arrow - down
+  // space - start, jump and again
+  // enter - again
+
+  margin: 0;
+  background-color: transparent;
+
+  .parkur {
+    width: 100vw;
+    height: 80vh;
+    overflow: hidden;
+    margin: 15px auto 0;
+    position: relative;
+
+    .trail {
+      div {
+        transform: rotateZ(-0.5deg);
+        clip: rect(30px, 973px, 285px, 80px);
+        background-image: url(/assets/trail.png);
+        background-size: contain;
+        bottom: -4px;
+        overflow: hidden;
+        width: 980px;
+        height: 180px;
+        z-index: 2;
+        position: absolute;
+        transition: 1s;
+        filter:brightness(60%);
+      }
+
+      .trail1 {
+        left: 311px;
+      }
+      .trail1.move {
+        animation: test1 linear infinite;
+      }
+
+      .trail2 {
+        left: -581px;
+      }
+      .trail2.move {
+        animation: test2 linear infinite;
+      }
+
+      .trail3 {
+        left: -1475px;
+      }
+      .trail3.move {
+        animation: test3 linear infinite;
+      }
+    }
+
+    .rockCactus {
+      width: 142px;
+      height: 74px;
+      background-image: url(/assets/rock.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      position: absolute;
+      z-index: 4;
+      bottom: 11vh;
+      right: 70vw;
+      filter: brightness(80%);
+    }
+
+    .tekrar {
+      width: 191px;
+      height: 64px;
+      position: absolute;
+      margin-left: 205px;
+      z-index: 100;
+      margin-top: 32px;
+      display: none;
+
+      .oyun-bitti {
+        width: 191px;
+        height: 11px;
+        margin-bottom: 23px;
+
+        img {
+          width: 191px;
+          height: 11px;
+          float: left;
+        }
+      }
+
+      .tikla {
+        width: 34px;
+        height: 30px;
+        margin-left: 78px;
+
+        img {
+          width: 34px;
+          height: 30px;
+          float: left;
+        }
+      }
+    }
+
+    .dinoJim1 {
+      background-image: url("/assets/jim.PNG");
+      background-size: contain;
+      width: 163px;
+      height: 250px;
+      top: 27vh;
+      z-index: 10;
+      position: absolute;
+      -webkit-transition: 0.35s;
+      transition: 0.35s;
+      right: 277px;
+
+      .goz {
+        width: 2px;
+        height: 2px;
+        background-color: #ffffff;
+        position: relative;
+        z-index: 1;
+        top: 3px;
+        left: 24px;
+      }
+
+      .agiz {
+        width: 10px;
+        height: 2px;
+        background-color: #535353;
+        position: absolute;
+        z-index: 11;
+        display: none;
+        top: 11px;
+        left: 30px;
+      }
+
+      .bacak1 {
+        width: 15px;
+        height: 8px;
+        margin-left: 10px;
+        z-index: 3;
+        position: relative;
+
+      }
+
+      .bacak2 {
+        width: 15px;
+        height: 8px;
+        margin-left: 10px;
+        z-index: 3;
+        position: relative;
+
+      }
+
+      .bacak3 {
+        width: 15px;
+        height: 8px;
+        margin-left: 10px;
+        z-index: 3;
+        position: relative;
+      }
+    }
+  }
+
+  @keyframes test1 {
+    0%   {left:311px;}
+    100% {left:1205px;}
+  }
+  @keyframes test2 {
+    0%   {left:-581px;}
+    100% {left:311px;}
+  }
+  @keyframes test3 {
+    0%   {left:-1475px;}
+    100% {left:-581px;}
+  }
+}
+
+
+

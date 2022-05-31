@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {LevelService} from "../level.service";
 
 @Component({
   selector: 'app-level6',
@@ -6,14 +7,9 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./level6.component.scss']
 })
 export class Level6Component implements OnInit {
-  @Output() nextEvent = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(public levelService: LevelService) { }
 
   ngOnInit(): void {
-  }
-
-  next(id: number): void {
-    this.nextEvent.next(id);
   }
 }

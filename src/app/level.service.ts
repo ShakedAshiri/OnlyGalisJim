@@ -1,12 +1,22 @@
-import { Injectable } from '@angular/core';
-import {LevelNode} from "./level-node";
+import {EventEmitter, Injectable, Output} from '@angular/core';
+import {LevelNode, LEVELS} from "./level-node";
 import {BehaviorSubject, Observable} from "rxjs";
+
 //import {readFileSync} from "fs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LevelService {
+  @Output() private nextEvent = new EventEmitter<LEVELS>();
+
+  get jim(): { src: string } {
+    return this._jim;
+  }
+
+  set jim(value: { src: string }) {
+    this._jim = value;
+  }
   levelsFile: any;
   private _userInteraction: BehaviorSubject<string> = new BehaviorSubject("");
 
@@ -14,65 +24,86 @@ export class LevelService {
   levelNodes: LevelNode[] = [];
   endings: LevelNode[] = [];
 
+  private _jim: {src: string} = {src:"assets/jim.PNG"};
+
   // params
   hasBeard = false;
-
+  private _money = 0;
 
   constructor() {
-    var lvl = <LevelNode>{};
-    lvl.id = 1;
-    lvl.nextLevels = [2,3,-1,-2];
-    lvl.name = "start";
+    /*var lvl1 = <LevelNode>{};
+    lvl1.id = 1;
+    lvl1.nextLevels = [2,3,-1,-2];
+    lvl1.name = "start";*/
 
-// u is criminal - handle later
-    var lvl1 = <LevelNode>{};
-    lvl1.id = 2;
-    lvl1.nextLevels = [-1];
-    lvl1.name = "criminal";
+    // army base
+    var lvl2 = <LevelNode>{};
+    lvl2.id = LEVELS.ARMY_BASE;
+    lvl2.nextLevels = [LEVELS.WORK_OR_TRIP, LEVELS.END_DEFAULT, LEVELS.CRIMINAL];
+    lvl2.name = "army";
 
+    // work or trip?
+    var lvl5 = <LevelNode>{};
+    lvl5.id = LEVELS.WORK_OR_TRIP;
+    lvl5.nextLevels = [LEVELS.CHOOSE_HOLIDAY, LEVELS.COINS, LEVELS.END_DEFAULT]; //LEVELS.COINS, LEVELS.BARTENDER, LEVELS.SHARKS
+    lvl5.name = "workOrTrip";
 
     // choose work
-    var lvl2 = <LevelNode>{};
-    lvl2.id = 3;
-    lvl2.nextLevels = [4,5,6];
-    lvl2.name = "choose work";
+    /*var lvl3 = <LevelNode>{};
+    lvl3.id = 3;
+    lvl3.nextLevels = [LEVELS.CLOTHES_SHOP,5,6];
+    lvl3.name = "choose work";
+*/
 
-    // bartender
-    var lvl3 = <LevelNode>{};
-    lvl3.id = 4;
-    lvl3.nextLevels = [7];
-    lvl3.name = "bartender";
-
-    // sharks
+    // clothes shop
     var lvl4 = <LevelNode>{};
-    lvl4.id = 5;
-    lvl4.nextLevels = [7];
-    lvl4.name = "sharks";
+    lvl4.id = LEVELS.CLOTHES_SHOP;
+    lvl4.nextLevels = [LEVELS.END_DEFAULT, LEVELS.CRIMINAL];
+    lvl4.name = "clothes";
 
-    // accountant
-    var lvl5 = <LevelNode>{};
-    lvl5.id = 6;
-    lvl5.nextLevels = [7];
-    lvl5.name = "accountant";
-
-    // clothes
+    // criminal
     var lvl6 = <LevelNode>{};
-    lvl6.id = 7;
-    lvl6.nextLevels = [8];
-    lvl6.name = "clothes";
+    lvl6.id = LEVELS.CRIMINAL;
+    lvl6.nextLevels = [LEVELS.END_DEFAULT];
+    lvl6.name = "criminal";
 
-    // field trip time
+
+    // Israel trail
     var lvl7 = <LevelNode>{};
-    lvl7.id = 8;
-    lvl7.nextLevels = [-3, -3, -3];
-    lvl7.name = "field trip time";
+    lvl7.id = LEVELS.ISRAEL_TRAIL;
+    lvl7.nextLevels = [LEVELS.END_DEFAULT];
+    lvl7.name = "IsraelTrip";
 
 
-    this.levelNodes.push(lvl, lvl1, lvl2, lvl3, lvl4, lvl5, lvl6, lvl7);
+    // Coins
+    var lvl8 = <LevelNode>{};
+    lvl8.id = LEVELS.COINS;
+    lvl8.nextLevels = [LEVELS.END_DEFAULT];
+    lvl8.name = "coins";
+
+    // Bartender
+    var lvl9 = <LevelNode>{};
+    lvl9.id = LEVELS.BARTENDER;
+    lvl9.nextLevels = [LEVELS.END_DEFAULT];
+    lvl9.name = "bartender";
+
+    // Sharks
+    var lvl10 = <LevelNode>{};
+    lvl10.id = LEVELS.SHARKS;
+    lvl10.nextLevels = [LEVELS.END_DEFAULT];
+    lvl10.name = "sharks";
+
+    // Choose holidy
+    var lvl11 = <LevelNode>{};
+    lvl11.id = LEVELS.CHOOSE_HOLIDAY;
+    lvl11.nextLevels = [LEVELS.ISRAEL_TRAIL, LEVELS.END_DEFAULT, LEVELS.END_DEFAULT];
+    lvl11.name = "choose holiday";
+
+    this.levelNodes.push(lvl2, lvl4, lvl5, lvl6, lvl7, lvl8, lvl9, lvl10, lvl11);
 
     var end1 = <LevelNode>{};
     end1.id = -1;
-    end1.nextLevels = [1];
+    end1.nextLevels = [2];
 
     var end2 = <LevelNode>{};
     end2.id = -2;
@@ -110,11 +141,29 @@ export class LevelService {
     this.hasBeard = b;
   }
 
+  get money(): number {
+    return this._money;
+  }
+
+  set money(value: number) {
+    this._money = value;
+  }
+
   public get getUserInteraction(): Observable<any>{
     return this._userInteraction.asObservable();
   }
 
-  setUserInteraction(val: string) {
+  setUserInteraction(val: any) {
     this._userInteraction.next(val);
   }
+
+  getNextEvent() {
+    return this.nextEvent;
+  }
+
+  nextLevel(id: LEVELS): void {
+    this.nextEvent.next(id);
+  }
 }
+
+

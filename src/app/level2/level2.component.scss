@@ -1,0 +1,81 @@
+.army-base {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url('/assets/army-office.jpg');
+  background-size: contain;
+}
+
+.calendar {
+  img {
+    width: 141px;
+  }
+
+  div {
+    -webkit-text-stroke: 0.3px white;
+    color: black;
+    text-shadow: 2px 3px 5px #000000;
+    font-size: xxx-large;
+    font-weight: bolder;
+  }
+
+  outline: none;
+  background-color: transparent;
+  border: none;
+  z-index: 2;
+  position: relative;
+  right: 415px;
+  bottom: 138px;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.outlook {
+  img {
+    width: 103px;
+  }
+
+  .content {
+    -webkit-text-stroke: 0.3px white;
+    color: black;
+    font-size: x-large;
+    font-weight: bold;
+    background: white;
+    padding: 11px 13px 6px 0px;
+    top: 35px;
+    left: 80px;
+  }
+
+  .title {
+    -webkit-text-stroke: 0.3px white;
+    color: black;
+    font-size: x-small;
+    font-weight: bold;
+    background: white;
+    top: 21px;
+    left: 94px;
+    z-index: 1;
+    width: 30px
+  }
+
+  border-color: #493e41;
+  border-width: 8px 5px 10px 4px;
+  z-index: 2;
+  position: relative;
+  right: 443px;
+  top: 29px;
+}
+
+.army-jim {
+  width: 205px;
+  z-index: 3;
+  position: relative;
+  top: 117px;
+}

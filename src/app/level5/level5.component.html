@@ -1,3 +1,93 @@
+<div class="questionare">
+  <div class="container computer-container">
+    <nav class="navbar navbar-dark bg-dark">
+      <div>s
+        <svg style="margin-bottom: 7px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+          <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+        </svg>
+        <a class="navbar-brand web-title" href="#">פייקבוק</a>
+      </div>
 
-<button type="button" class="btn btn-info" (click)="next(0)">אופציה 1</button>
-<button type="button" class="btn btn-info" (click)="next(1)">אופציה 2</button>
+      <a class="nav-link" href="#">Link</a>
+
+      <a class="nav-link disabled" href="#">Disabled</a>
+
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+
+    </nav>
+
+    <div class="row">
+      <div class="col-8">
+
+        <div class="row">
+          <div class="col-12">
+            <h4 class="questionare-title">שאלון: איזה עבודה כדאי לי?</h4>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12"><div class="card" >
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <label for="exampleFormControlSelect1" class="col-sm-6 col-form-label">{{questionText.quest1}}</label>
+                <select  id="exampleFormControlSelect1" class="col-sm-6">
+                  <option>כן</option>
+                  <option>לא</option>
+                  <option>שחור</option>
+                  <option>לבן</option>
+                </select>
+              </li>
+              <li class="list-group-item">
+                <label for="exampleFormControlSelect2" class="col-sm-6 col-form-label">{{questionText.quest2}}</label>
+                <select  id="exampleFormControlSelect2" class="col-sm-6">
+                  <option>כן</option>
+                  <option>לא</option>
+                  <option>שחור</option>
+                  <option>לבן</option>
+                </select>
+              </li>
+            </ul>
+          </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <button type="button" class="btn btn-light next-btn" (click)="clickNext()">{{buttonText}}</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ad 1 -->
+      <div class="col-4">
+        <div class="first-ad-div">
+          <button class="first-ad" type="button" (click)="adToggle(true)">
+            <img src="assets/ad1.jfif">
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-popup *ngIf="openAd" [textContent]="adText" [noButton]="true"
+           (okEvent)="levelService.nextLevel(0  )" (noEvent)="closeAd()"></app-popup>
+
+

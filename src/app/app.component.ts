@@ -13,6 +13,6 @@ export class AppComponent {
   }
 
   userInteration(event:any) {
-    this.levelService.setUserInteraction("ok");
+    this.levelService.setUserInteraction(event);
   }
 }

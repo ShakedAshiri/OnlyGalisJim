@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {LevelService} from "../level.service";
-import {LevelNode} from "../level-node";
+import {LevelNode, LEVELS} from "../level-node";
 
 @Component({
   selector: 'app-level-page',
@@ -18,6 +18,10 @@ export class LevelPageComponent implements OnInit {
   ngOnInit(): void {
     let lvl = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
     this.level = this.levelService.getLevel(lvl);
+
+    this.levelService.getNextEvent().subscribe(lvl => {
+      this.next(lvl);
+    })
   }
 
   next(idOption: number) {

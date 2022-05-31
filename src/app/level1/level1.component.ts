@@ -9,22 +9,17 @@ import {Subscription} from "rxjs";
   styleUrls: ['./level1.component.scss']
 })
 export class Level1Component implements OnInit {
-  @Output() nextEvent = new EventEmitter<number>();
   @Output() nextEndEvent = new EventEmitter<number>();
 
   private userMovedSubscription!: Subscription;
   isWait = false;
 
 
-  constructor(private levelService: LevelService) {}
+  constructor(public levelService: LevelService) {}
 
 
   ngOnInit(): void {
     this.nopeButton();
-  }
-
-  next(id: number): void {
-    this.nextEvent.next(id);
   }
 
   nopeButton() {
@@ -62,7 +57,7 @@ export class Level1Component implements OnInit {
 
         this.onTimesUp();
         this.userMovedSubscription.unsubscribe();
-        this.nextEvent.emit(3);
+        this.levelService.nextLevel(3);
       } else {
         moves++;
       }
@@ -113,7 +108,7 @@ export class Level1Component implements OnInit {
 
       if (timeLeft === 0) {
         this.onTimesUp();
-        this.nextEvent.emit(1);
+        this.levelService.nextLevel(1);
       }
     }, 1000);
 

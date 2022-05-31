@@ -1,0 +1,125 @@
+.coin {
+
+  right: 1039px;
+  position: relative;
+  width: 150px;
+  height: 150px;
+  //animation: x-motion 3s ease-in-out 0s infinite alternate;
+
+  background-image: url("/assets/coin.png");
+  background-size: contain;
+
+  offset-path: path("M833.96759,350.2071C711.01547,350.39835 806.55922,349.22657 556.71211,347.87976C323.67908,345.47736 467.22261,25.95784 281.03643,74.9068C231.67912,85.6539 150.74648,186.027 142.90949,337.01436C90.60488,350.33679 2.30285,338.87773 -116.72145,346.31229");
+  animation: move 3000ms infinite ease-in-out;
+
+  //width: 100px;
+  //height: 100px;
+  //animation: x-motion 6s cubic-bezier(0.42, 0.5, 0.6, 1) 0s infinite;
+}
+
+@keyframes move {
+  0% {
+    offset-distance: 100%;
+  }
+  100% {
+    offset-distance: 0%;
+  }
+}
+
+.container {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+}
+
+
+.sun {
+
+  position: absolute;
+  width: 100px;
+  height: 200px;
+  //animation: x-motion 3s ease-in-out 0s infinite alternate;
+
+
+  //width: 100px;
+  //height: 100px;
+  animation: x-motion 6s cubic-bezier(0.42, 0.5, 0.6, 1) 0s infinite;
+}
+
+.sun:before {
+  animation: y-motion 6s cubic-bezier(0.42, 0, 0.58, 1) 0s infinite;
+
+  background-image: url("/assets/coin.png");
+  background-size: contain;
+  content: '';
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 100%;
+  //cubic-bezier(0.42, 0, 0.58, 1)
+
+  border-radius: 15px;
+}
+
+
+
+@keyframes x-motion1 {
+  0% {
+    right: 600px;
+  }
+
+  100% {
+    //left: calc(100% - 30px);
+    right: 100px;
+  }
+}
+
+@keyframes y-motion1 {
+  0%, 100% {
+    top: 100%;
+  }
+
+  50% {
+    top: 10%;
+  }
+}
+
+@keyframes my-motion {
+  0% {
+    top: 60%;
+    //left: 0;
+    right: 80%;
+  }
+
+  50% {
+    top: 10%;
+    right: 50%;
+  }
+
+  100% {
+    top: 60%;
+    right: 20%
+  }
+}
+
+
+
+@keyframes x-motion {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: calc(100% - 30px);
+  }
+}
+
+@keyframes y-motion {
+  0%, 100% {
+    top: 100%;
+  }
+
+  50% {
+    top: 0%;
+  }
+}

@@ -1,0 +1,48 @@
+.clothes-shop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url('/assets/clothes-shop.jpg');
+  background-size: cover;
+}
+
+.blue-shirt {
+  img {
+    width: 105px;
+  }
+
+  outline: none;
+  background-color: transparent;
+  border: none;
+  z-index: 3;
+  position: relative;
+  right: 118px;
+  top: 17px;
+}
+
+.suit {
+  img {
+    width: 106px;
+  }
+
+  outline: none;
+  background-color: transparent;
+  border: none;
+  z-index: 2;
+  position: relative;
+  right: 169px;
+  top: 24px;
+}
+
+.jim {
+  width: 316px;
+  z-index: 3;
+  position: relative;
+  top: 103px;
+}
+
+.clothes-row {
+  padding-top: 40px;
+}

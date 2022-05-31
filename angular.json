@@ -34,7 +34,8 @@
               "src/styles.scss",
               "./node_modules/bootstrap-v4-rtl/dist/css/bootstrap-rtl.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/bootstrap-v4-rtl/dist/js/bootstrap.js"]
           },
           "configurations": {
             "production": {

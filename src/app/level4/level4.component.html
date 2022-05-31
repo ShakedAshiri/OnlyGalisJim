@@ -1,3 +1,16 @@
+<div class="clothes-shop">
 
-<button type="button" class="btn btn-info" (click)="next(0)">אופציה 1</button>
-<button type="button" class="btn btn-info" (click)="next(1)">אופציה 2</button>
+  <button class="suit" type="button" (click)="pickShirt('suit')">
+    <img src="assets/suit.png">
+  </button>
+
+    <button class="blue-shirt" type="button" (click)="pickShirt('blue')">
+      <img src="assets/blue-shirt.png">
+    </button>
+
+    <img class="jim" src="{{currJim.src}}" [ngStyle]="{'right': jimRight + 'px'}">
+
+
+</div>
+
+<app-popup *ngIf="buyShirt.isNow" [textContent]="buyShirt.text" (okEvent)="ok()"></app-popup>

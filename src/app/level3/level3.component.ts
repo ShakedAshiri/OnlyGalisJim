@@ -7,15 +7,10 @@ import {LevelService} from "../level.service";
   styleUrls: ['./level3.component.scss']
 })
 export class Level3Component implements OnInit {
-  @Output() nextEvent = new EventEmitter<number>();
 
-  constructor(private levelService: LevelService) { }
+  constructor(public levelService: LevelService) { }
 
   ngOnInit(): void {
     this.levelService.setHasBeard(true);
-  }
-
-  next(id: number): void {
-    this.nextEvent.next(id);
   }
 }
