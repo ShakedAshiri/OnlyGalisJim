@@ -1,6 +1,6 @@
 export interface LevelNode {
   id: number;
-  nextLevels: LEVELS[];
+  nextPossibleLevels: LEVELS[];
   name: string;
 }
 

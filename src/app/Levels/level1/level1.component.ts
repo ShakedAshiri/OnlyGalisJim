@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import * as $ from 'jquery';
-import {LevelService} from "../level.service";
+import {LevelService} from "../../level.service";
 import {Subscription} from "rxjs";
 
 @Component({

@@ -12,7 +12,7 @@ export class Level7Component implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.Dino();
+    //this.Dino();
   }
 
   Dino() {
@@ -471,6 +471,6 @@ export class Level7Component implements OnInit {
         }
       });
     });
-  }
+    }
 
 }

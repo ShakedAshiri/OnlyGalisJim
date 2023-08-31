@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {LevelPageComponent} from "./level-page/level-page.component";
+import {LevelPageComponent} from "./Levels/level-page/level-page.component";
 import {MainPageComponent} from "./main-page/main-page.component";
 import {EndingComponent} from "./ending/ending.component";
 

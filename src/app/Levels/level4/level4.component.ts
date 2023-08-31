@@ -1,9 +1,9 @@
+import { MatDialog } from '@angular/material/dialog';
 import {Component, EventEmitter, HostListener, OnInit, Output} from '@angular/core';
-import {LevelService} from "../level.service";
+import {LevelService} from "../../level.service";
 import {Observable, Subscription} from "rxjs";
-import {LevelNode} from "../level-node";
-import {MatDialog} from '@angular/material/dialog';
-import {PopupComponent} from "../popup/popup.component";
+import {LEVELS, LevelNode} from "../../level-node";
+import {PopupComponent} from "../../popup/popup.component";
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -85,7 +85,7 @@ export class Level4Component implements OnInit {
     this.moveJim = true;
     if (this.currJim.price <= this.levelService.money) {
       this.levelService.jim.src = this.currJim.src;
-      this.levelService.nextLevel(0);
+      this.levelService.nextLevel(LEVELS.END_DEFAULT);
     }
   }
 }

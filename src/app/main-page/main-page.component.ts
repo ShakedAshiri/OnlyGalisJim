@@ -15,7 +15,7 @@ export class MainPageComponent implements OnInit {
   }
 
   start() {
-    this.levelService.currentLevel = 2;
+    //this.levelService.currentLevel = 2;
   }
 
   titlePlus() {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {LevelService} from "../level.service";
-import {LevelNode, LEVELS} from "../level-node";
+import {LevelService} from "../../level.service";
+import {LevelNode, LEVELS} from "../../level-node";
 
 @Component({
   selector: 'app-level-page',
@@ -9,7 +9,7 @@ import {LevelNode, LEVELS} from "../level-node";
   styleUrls: ['./level-page.component.scss']
 })
 export class LevelPageComponent implements OnInit {
-  public level: LevelNode = {id:-1, nextLevels:[], name:""};
+  public level: LevelNode = {id:-1, nextPossibleLevels:[], name:""};
 
   constructor(private route: ActivatedRoute,
               protected levelService: LevelService,
@@ -25,14 +25,14 @@ export class LevelPageComponent implements OnInit {
   }
 
   next(idOption: number) {
-    let id = this.level.nextLevels[idOption];
-
-    if (id > 0) {
-      this.level = this.levelService.getLevel(id);
+    // Separate between levels and endings
+    if (idOption > 0) {
+      this.level = this.levelService.getLevel(idOption);
+      let navTo = 'level/' + idOption;
+      this.router.navigate([navTo]);
     } else {
-      let navTo = 'end/' + id;
+      let navTo = 'end/' + idOption;
       this.router.navigate([navTo]);
     }
-
   }
 }
