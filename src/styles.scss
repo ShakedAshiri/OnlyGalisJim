@@ -1,9 +1,8 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 /* You can add global styles to this file, and also import other style files */
-body {
+html, body {
   height: 100%;
-
 }
 
 .seaView {
@@ -13,8 +12,11 @@ body {
   bottom: 0;
   left: 0;
   background-image: url('/assets/sea.jpg');
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #00ffe7;
 }
 
-/* Importing Bootstrap SCSS file. */
+/* Importing Bootstrap SCSS file.as*/
 @import 'bootstrap/scss/bootstrap';

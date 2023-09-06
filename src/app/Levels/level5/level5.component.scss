@@ -6,23 +6,18 @@
   right: 290px;
 }
 
-.questionare {
-  position: fixed;
-  top: -220px;
-  right: 0px;
-  bottom: 0;
-  left: -153px;
-  background-size: cover;
-  background-image: url(/assets/computer-background.png);
-  width: 1717px;
-}
-
 .computer-container {
-  top:331px;
   position: relative;
   width: 620px;
-  right: 52px;
   height: 321px;
+
+  .row {
+    margin-right: 0px;
+  }
+
+  .next-button {
+    top: 2vh;
+  }
 }
 
 .web-title {
@@ -51,4 +46,8 @@
 .questionare-title {
   padding: 10px 0;
   margin-top: 0.5rem;
+}
+
+.empty-row {
+  height: 14vh;
 }

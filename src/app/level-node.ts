@@ -2,9 +2,11 @@ export interface LevelNode {
   id: number;
   nextPossibleLevels: LEVELS[];
   name: string;
+  background: string;
 }
 
 export enum LEVELS {
+  START_PAGE = 0,
   ARMY_BASE = 2,
   WORK_OR_TRIP = 5,
   END_DEFAULT= -1,

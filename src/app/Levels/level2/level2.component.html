@@ -1,16 +1,56 @@
-<div class="army-base">
-  <img class="army-jim" src="/assets/army-jim.png" [ngStyle]="{'right': jimRight + 'px'}">
-
-  <button class="calendar">
-    <div class="centered" (click)="countdown()">{{countdownCounter}}</div>
-    <img src="/assets/calendar.png">
-  </button>
-
-  <button class="outlook" (click)="sign()">
-    <div class="centered title">אל: גל</div>
-    <div class="centered content">קבע?</div>
-    <img src="/assets/outlook.jpg">
-  </button>
+<div class="row ">
+  <div class="col emptyRow">
+  </div>
 </div>
-<!--<app-popup *ngIf="signPopup" [textContent]="signText" (okEvent)="levelService.nextLevel(1)" [noButton]="true"></app-popup>-->
+<div class="row">
+  <!--col calendar and outlook-->
+  <div class="col">
+    <!--row calendar-->
+    <div class="row">
+      <div class="col">
+        <button class="calendar float-left">
+          <div *ngIf="countdownCounter > 0" class="centered" [ngStyle]="{'color': countdownCounter > 3 ? 'black' : 'red'}"
+               (click)="countdown()">{{ countdownCounter}}</div>
+          <div *ngIf="countdownCounter == 0"  class="centered">
+            <ul class="c-rainbow">
+              <li class="c-rainbow__layer c-rainbow__layer--white">היום</li>
+              <li class="c-rainbow__layer c-rainbow__layer--orange">היום</li>
+              <li class="c-rainbow__layer c-rainbow__layer--red">היום</li>
+              <li class="c-rainbow__layer c-rainbow__layer--violet">היום</li>
+              <li class="c-rainbow__layer c-rainbow__layer--blue">היום</li>
+              <li class="c-rainbow__layer c-rainbow__layer--green">היום</li>
+              <li class="c-rainbow__layer c-rainbow__layer--yellow">היום</li>
+             </ul>
+          </div>
+          <img src="/assets/calendar.png">
+        </button>
+      </div>
+    </div>
+    <!--row outlook-->
+    <div class="row">
+      <div class="col">
+        <button class="outlook float-left" (click)="sign()">
+          <div class="row img-row" >
+            <div class="col-6" style="padding: 0px;">
+              <div class="row outlookEmptyRow"></div>
+              <div class=" title">אל: גל</div>
+              <div class=" content">קבע?</div>
+            </div>
+            <div class="col-6">
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- col jim -->
+  <div class="col" >
+    <img class="jim" src="/assets/army-jim.png" [ngStyle]="{'right': jimRight + 'vw'}">
+  </div>
+</div>
+
+
+
+
+
 

@@ -19,7 +19,7 @@ export class LevelService {
   levelsFile: any;
   private _userInteraction: BehaviorSubject<string> = new BehaviorSubject("");
 
-  currentLevel: LEVELS = LEVELS.ARMY_BASE;
+  currentLevel: LEVELS = LEVELS.START_PAGE; // default start
   levelNodes: LevelNode[] = [];
   endings: LevelNode[] = [];
 
@@ -40,12 +40,14 @@ export class LevelService {
     lvl2.id = LEVELS.ARMY_BASE;
     lvl2.nextPossibleLevels = [LEVELS.WORK_OR_TRIP, LEVELS.END_DEFAULT, LEVELS.CRIMINAL];
     lvl2.name = "army";
+    lvl2.background = "army-office.jpg"
 
     // work or trip?
     var lvl5 = <LevelNode>{};
     lvl5.id = LEVELS.WORK_OR_TRIP;
-    lvl5.nextPossibleLevels = [LEVELS.CHOOSE_HOLIDAY, LEVELS.COINS, LEVELS.END_DEFAULT]; //LEVELS.COINS, LEVELS.BARTENDER, LEVELS.SHARKS
+    lvl5.nextPossibleLevels = [LEVELS.CHOOSE_HOLIDAY, LEVELS.BARTENDER, LEVELS.END_DEFAULT]; //LEVELS.COINS, LEVELS.BARTENDER, LEVELS.SHARKS
     lvl5.name = "workOrTrip";
+    lvl5.background = "computer-background1.png";
 
     // choose work
     /*var lvl3 = <LevelNode>{};
@@ -59,51 +61,56 @@ export class LevelService {
     lvl4.id = LEVELS.CLOTHES_SHOP;
     lvl4.nextPossibleLevels = [LEVELS.END_DEFAULT, LEVELS.CRIMINAL];
     lvl4.name = "clothes";
+    lvl4.background = "clothes-shop.jpg";
 
     // criminal
     var lvl6 = <LevelNode>{};
     lvl6.id = LEVELS.CRIMINAL;
     lvl6.nextPossibleLevels = [LEVELS.END_DEFAULT];
     lvl6.name = "criminal";
-
+    lvl6.background = "thief-and-cop.png";
 
     // Israel trail
     var lvl7 = <LevelNode>{};
     lvl7.id = LEVELS.ISRAEL_TRAIL;
     lvl7.nextPossibleLevels = [LEVELS.END_DEFAULT];
     lvl7.name = "IsraelTrip";
-
+    lvl7.background = "sea.jpg";
 
     // Coins
     var lvl8 = <LevelNode>{};
     lvl8.id = LEVELS.COINS;
     lvl8.nextPossibleLevels = [LEVELS.END_DEFAULT];
     lvl8.name = "coins";
+    lvl8.background = "sea.jpg";
 
     // Bartender
     var lvl9 = <LevelNode>{};
     lvl9.id = LEVELS.BARTENDER;
     lvl9.nextPossibleLevels = [LEVELS.END_DEFAULT];
     lvl9.name = "bartender";
+    lvl9.background = "bar.png";
 
     // Sharks
     var lvl10 = <LevelNode>{};
     lvl10.id = LEVELS.SHARKS;
     lvl10.nextPossibleLevels = [LEVELS.END_DEFAULT];
     lvl10.name = "sharks";
+    lvl10.background = "sea.jpg";
 
     // Choose holidy
     var lvl11 = <LevelNode>{};
     lvl11.id = LEVELS.CHOOSE_HOLIDAY;
     lvl11.nextPossibleLevels = [LEVELS.ISRAEL_TRAIL, LEVELS.END_DEFAULT, LEVELS.END_DEFAULT];
     lvl11.name = "choose holiday";
+    lvl11.background = "sea.jpg";
 
     this.levelNodes.push(lvl2, lvl4, lvl5, lvl6, lvl7, lvl8, lvl9, lvl10, lvl11);
 
     var end1 = <LevelNode>{};
     end1.id = LEVELS.END_DEFAULT;
     end1.nextPossibleLevels = [2];
-
+    end1.background = "sea.jpg";
     /*var end2 = <LevelNode>{};
     end2.id = LEVELS.END_;
     end2.nextPossibleLevels = [LEVELS.ARMY_BASE];
@@ -161,15 +168,19 @@ export class LevelService {
   }
 
   nextLevel(id: LEVELS): void {
-    console.log("nextlevel")
-    console.log(id)
     // Allow only if possible next level
-    if ( this.getLevel(this.currentLevel).nextPossibleLevels.includes(id) ) {
+    if (this.currentLevel == LEVELS.START_PAGE ||
+        this.getLevel(this.currentLevel).nextPossibleLevels.includes(id) ) {
+
+      this.currentLevel = id;
       this.nextEvent.next(id);
     } else {
       this.nextEvent.next(LEVELS.END_DEFAULT);
       console.log("ERROR: unknown ending")
     }
+  }
 
+  getCurrentLevel() {
+    return this.getLevel(this.currentLevel);
   }
 }

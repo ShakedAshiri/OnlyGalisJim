@@ -1,6 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LevelService} from "../../level.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import { PopupServiceService } from 'src/app/popup-service.service';
+import { LEVELS } from 'src/app/level-node';
 
 @Component({
   selector: 'app-level5',
@@ -8,46 +10,59 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./level5.component.scss']
 })
 export class Level5Component implements OnInit {
-
-  openAd : boolean = false;
   adText: string = "רק היום רק היום! צא לחופשה שחיילים רק חולמים עליה!";
   nextClicked : boolean = false;
   adClicked: boolean = false;
-
-  // temp
-  questionText: {quest1: string, quest2: string} =  {quest1: "1. שאלה כלשהי", quest2: "2. שאלה נוספת"}
   buttonText: string = "המשך >";
   isDone: boolean = false;
 
-  constructor(public levelService: LevelService) { }
+  // temp
+  questionText: {quest1: string, quest2: string} =  {quest1: "1. שאלה כלשהי", quest2: "2. שאלה נוספת"}
+
+
+  constructor(public levelService: LevelService, public popupService: PopupServiceService) { }
 
   ngOnInit(): void {
   }
 
   clickNext() {
     if (!this.isDone) {
-      this.nextClicked = true;
-      this.openAd = true;
-
+      this.openAd();
     } else {
-      this.levelService.nextLevel(1);
+      // Calculate best career and progress to that level
+      this.popupService.openPopupDialog({ message: "מחשב תוצאות מבחן...", buttonText: {
+        ok: "אוקי"
+      }}).subscribe(result => {
+
+        this.popupService.openPopupDialog({ message: "חישוב הסתיים! מוכן לגלות את הקריירה המושלמת עבורך?",
+        buttonText: {
+          ok: "!כן"
+        }}).subscribe(result => {
+          // TODO: should be accourding to calc result
+          this.levelService.nextLevel(LEVELS.BARTENDER);
+        });
+      });
     }
   }
 
-  adToggle(isOpen: boolean) {
-    this.adClicked = isOpen;
-    this.openAd = isOpen;
+  openAd() { //clickedNext: boolean
+    this.popupService.openPopupDialog({ message: this.adText, buttonText: {
+      ok: "!כן",
+      cancel: "התעלם"
+    }}).subscribe(result => {
+      if (result) {
+        // Clicked 'yes' - move to holiday level
+        this.levelService.nextLevel(LEVELS.CHOOSE_HOLIDAY);
+      } else { //if (!this.isDone) {
+        this.closeAd();
+      }
+    });
   }
 
   closeAd() {
-    if (this.adClicked) {
-      this.adToggle(false);
-    } else {
-
-      // next questions
-      this.questionText = {quest1: "3. עוד שאלה", quest2: "4. אפילו עוד אחת"}
-      this.buttonText = "סיימתי!";
-      this.isDone = true;
-    }
+    // next questions
+    this.questionText = {quest1: "3. עוד שאלה", quest2: "4. אפילו עוד אחת"}
+    this.buttonText = "סיימתי!";
+    this.isDone = true;
   }
 }

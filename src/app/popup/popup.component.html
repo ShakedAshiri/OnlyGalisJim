@@ -1,9 +1,9 @@
 <mat-dialog-content rtl class="rtl" dir="rtl">
-	<p>
+	<p style="text-align: center;">
 		{{message}}
 	</p>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
 	<button mat-raised-button color="primary" (click)="clickBtn(true)" tabindex="1">{{confirmButtonText}}</button>
-	<button mat-raised-button (click)="clickBtn(false)" mat-dialog-close tabindex="-1">{{cancelButtonText}}</button>
+	<button *ngIf="cancelButtonText" mat-raised-button (click)="clickBtn(false)" mat-dialog-close tabindex="-1">{{cancelButtonText}}</button>
 </mat-dialog-actions>

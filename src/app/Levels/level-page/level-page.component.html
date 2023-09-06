@@ -1,8 +1,4 @@
-<div class="seaView container-fluid">
-
-
-  <app-level1  *ngIf="level.id == 1"></app-level1>
-  <app-level2  *ngIf="level.id == 2"></app-level2>
-  <app-level3  *ngIf="level.id == 3"></app-level3>
-  <app-level4  *ngIf="level.id == 4"></app-level4>
+<div class="seaView container-fluid" [style]="getLevelBackground()">
+  <!--display current level-->
+  <router-outlet></router-outlet>
 </div>

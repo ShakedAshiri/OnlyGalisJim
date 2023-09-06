@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LevelService} from "../level.service";
+import { LEVELS } from '../level-node';
 
 @Component({
   selector: 'app-main-page',
@@ -15,7 +16,7 @@ export class MainPageComponent implements OnInit {
   }
 
   start() {
-    //this.levelService.currentLevel = 2;
+    this.levelService.nextLevel(LEVELS.ARMY_BASE);
   }
 
   titlePlus() {

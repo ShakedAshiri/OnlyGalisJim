@@ -10,38 +10,48 @@ import { LEVELS } from '../../level-node';
 })
 export class Level2Component implements OnInit {
 
-  countdownCounter: number = 100;
-  //signPopup = false;
+  countdownArray: number[] = [100, 99, 98, 90, 84, 76, 53, 20, 6, 3, 2, 1, 0];
+  countdownIndex: number = 0;
+  countdownCounter: number = this.countdownArray[this.countdownIndex]
+
   signText = "אז מה, אולי תחתום קבע?";
-  jimRight = 539;
+  escapeText: string[] = ["גל?", "גל????", "הוא ברח!!!"];
+  escaped: boolean = false;
+  jimRight = 0;
+  MAX_LEFT = -68;
+  MAX_RIGHT = 47;
 
   constructor(public levelService: LevelService,
               public PopupService: PopupServiceService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
 
   countdown() {
-    //TODO:delete!!!
-    //this.levelService.nextLevel(0);
+    this.countdownIndex++;
+    this.countdownCounter = this.countdownArray[this.countdownIndex];
 
-
-    this.countdownCounter--;
-
-    if (this.countdownCounter == 0) {
-      this.levelService.nextLevel(LEVELS.WORK_OR_TRIP);
+    if (this.countdownIndex + 1 == this.countdownArray.length) {
+      // YAY msg
+      this.PopupService.openPopupDialog(
+        { message: "מזל טוב!!!",
+          buttonText: {
+            ok: "?מוכן לשלב הבא"
+          }
+        }).subscribe(result => {
+          this.levelService.nextLevel(LEVELS.WORK_OR_TRIP);
+      });
     }
   }
 
   sign() {
-    //this.signPopup = true;
-    let foo: PopupDataNode = { message: this.signText, buttonText: {
-      ok: "יאללה",
-      cancel: "לא"
-    }};
-    this.PopupService.openPopupDialog(foo);
-    this.PopupService.dialogClosedSub().subscribe(result => {
+    this.PopupService.openPopupDialog(
+      { message: this.signText,
+        buttonText: {
+          ok: "יאללה",
+          cancel: "לא"
+        }
+      }).subscribe(result => {
       if (result) {
         // Choose to sign == immediate lose
         this.levelService.nextLevel(LEVELS.END_DEFAULT);
@@ -51,21 +61,57 @@ export class Level2Component implements OnInit {
 
   @HostListener('window:keydown.arrowLeft', ['$event'])
   handleLeftKeyDown(event: KeyboardEvent) {
-    if (this.jimRight >= 1880) {
+    if (this.escaped)
+      return;
+
+    if (this.jimRight >= this.MAX_RIGHT) {
       // stop
-      this.levelService.nextLevel(LEVELS.CRIMINAL);
+      this.galEscapedMsg();
     } else {
-      this.jimRight += 8;
+      this.jimRight += 1;
     }
   }
 
   @HostListener('window:keydown.arrowRight', ['$event'])
   handleRightKeyDown(event: KeyboardEvent) {
-    if (this.jimRight <= -253) {
+    if (this.escaped)
+      return;
+    if (this.jimRight <= this.MAX_LEFT) {
       // stop
-      this.levelService.nextLevel(LEVELS.CRIMINAL)
+      this.galEscapedMsg();
     } else {
-      this.jimRight -= 8;
+      this.jimRight -= 1;
     }
+  }
+
+  galEscapedMsg() {
+    console.log("calling escaped");
+    this.escaped = true;
+    this.PopupService.openPopupDialog(
+      { message: this.escapeText[0],
+        buttonText: {
+          ok: "?"
+        }
+      }).subscribe(result => {
+
+        //msg 2
+        this.PopupService.openPopupDialog(
+          { message: this.escapeText[1],
+            buttonText: {
+              ok: "!"
+            }
+          }).subscribe(result => {
+
+            // msg 3
+            this.PopupService.openPopupDialog(
+              { message: this.escapeText[2],
+                buttonText: {
+                  ok: "!אוי לא"
+                }
+              }).subscribe(result => {
+                this.levelService.nextLevel(LEVELS.CRIMINAL);
+            });
+        });
+    });
   }
 }

@@ -1,16 +1,12 @@
-.army-base {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-image: url('/assets/army-office.jpg');
-  background-size: contain;
+.jim {
+  width: 34vh;
+  z-index: 5;
+  position: relative;
 }
 
 .calendar {
   img {
-    width: 141px;
+    width: 20vh;
   }
 
   div {
@@ -24,10 +20,9 @@
   outline: none;
   background-color: transparent;
   border: none;
-  z-index: 2;
+  z-index: 4;
   position: relative;
-  right: 415px;
-  bottom: 138px;
+  left: 17vh;
 }
 
 .centered {
@@ -39,7 +34,7 @@
 
 .outlook {
   img {
-    width: 103px;
+    width: 20vh;
   }
 
   .content {
@@ -48,9 +43,10 @@
     font-size: x-large;
     font-weight: bold;
     background: white;
-    padding: 11px 13px 6px 0px;
-    top: 35px;
-    left: 80px;
+    padding: 0px 0px 3px 0px;
+    top: 38px;
+    left: 114px;
+    margin-right: 9px;
   }
 
   .title {
@@ -59,23 +55,118 @@
     font-size: x-small;
     font-weight: bold;
     background: white;
-    top: 21px;
-    left: 94px;
+    top: 26px;
+    right: -0.8vh;
     z-index: 1;
-    width: 30px
+    text-align: right;
+    margin-right: 9px;
   }
 
-  border-color: #493e41;
-  border-width: 8px 5px 10px 4px;
-  z-index: 2;
+  .outlookEmptyRow {
+    height: 1vh;
+  }
+
+  right: 12.4vh;
+  bottom: 1vh;
   position: relative;
-  right: 443px;
-  top: 29px;
+  width: 21vh;
+  height: 12.4vh;
+
+  background-image: url('/assets/outlook.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center
 }
 
-.army-jim {
-  width: 205px;
-  z-index: 3;
-  position: relative;
-  top: 117px;
+.emptyRow {
+  height:22vh;
 }
+
+// CONFETTI
+.c-rainbow {
+  --axis-x: 1px;
+  --axis-y: 1rem;
+  --delay: 10;
+
+  --color-black: #000;
+  --color-white: #fff;
+  --color-orange: #D49C3D;
+  --color-red: #D14B3D;
+  --color-violet: #CF52EB;
+  --color-blue: #44A3F7;
+  --color-green: #5ACB3C;
+  --color-yellow: #DEBF40;
+
+  --color-foreground: var(--color-white);
+  --font-name: Righteous;
+ }
+
+ body {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: var(--font-name);
+
+  height: 100vh;
+ }
+
+ .c-rainbow {
+  counter-reset: rainbow;
+  position: relative;
+  display: block;
+
+  list-style: none;
+
+  padding: 0;
+  margin: 0;
+
+  &__layer {
+   --text-color: var(--color-foreground);
+   counter-increment: rainbow;
+   font-size: 3rem;
+   color: var(--text-color);
+
+   text-shadow:
+    -1px -1px 0 var(--color-black),
+     1px -1px 0 var(--color-black),
+     -1px 1px 0 var(--color-black),
+      1px 1px 0 var(--color-black),
+
+      4px 4px 0 rgba(0, 0, 0, .2);
+
+   animation: rainbow 1.5s ease-in-out infinite;
+
+   @for $i from 1 through 7 {
+    &:nth-child(#{$i}) {
+     animation-delay: calc( #{$i} / var(--delay) * 1s);
+     left: calc(var(--axis-x) * #{$i});
+     z-index: -#{$i * 10};
+    }
+   }
+
+   &:not(:first-child) {
+    position: absolute;
+    top: 0;
+   }
+
+   &--white  { --text-color: var(--color-white)}
+   &--orange { --text-color: var(--color-orange)}
+   &--red    { --text-color: var(--color-red)}
+   &--violet { --text-color: var(--color-violet)}
+   &--blue   { --text-color: var(--color-blue)}
+   &--green  { --text-color: var(--color-green)}
+   &--yellow { --text-color: var(--color-yellow)}
+  }
+ }
+
+
+ @keyframes rainbow {
+  0%, 100% {
+   transform: translatey(var(--axis-y));
+  }
+  50% {
+   transform: translatey(calc(var(--axis-y) * -1));
+  }
+ }

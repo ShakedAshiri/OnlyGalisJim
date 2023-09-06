@@ -18,7 +18,7 @@ interface DialogData {
 })
 export class PopupComponent {
   message: string = ""
-  cancelButtonText = "Cancel"
+  cancelButtonText = ""
   confirmButtonText = "Yes"
   //okEvent
 /*[textContent]="adText"
@@ -35,7 +35,7 @@ export class PopupComponent {
         this.message = data.message || this.message;
         if (data.buttonText) {
           this.confirmButtonText = data.buttonText.ok || this.confirmButtonText;
-          this.cancelButtonText = data.buttonText.cancel || this.cancelButtonText;
+          this.cancelButtonText = data.buttonText.cancel;
         }
       }
   }
