@@ -85,7 +85,6 @@ export class Level2Component implements OnInit {
   }
 
   galEscapedMsg() {
-    console.log("calling escaped");
     this.escaped = true;
     this.PopupService.openPopupDialog(
       { message: this.escapeText[0],
